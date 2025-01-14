@@ -143,7 +143,7 @@ class ViewController: UIViewController {
         }
         else {
             //农历
-            pickerView = LLDatePickerView(frame: CGRect(x: 0.0, y: 0.0, width: LL_SCREEN_WIDTH, height: 300.0), type: .LLLunar)
+            pickerView = LLDatePickerView(frame: CGRect(x: 0.0, y: 0.0, width: LL_SCREEN_WIDTH, height: 300.0), type: .lunar)
         }
         //跳转到指定日期
         pickerView.scroll(to: Date())

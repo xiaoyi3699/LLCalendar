@@ -17,7 +17,7 @@ class LLDatePickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
             return (endYear-startYear+1)
         }
         let year = pickerView.selectedRow(inComponent: 0)+startYear
-        if l_type == .LLLunar {
+        if l_type == .lunar {
             let yearModel = LLCalendarTool.loadLunarYear(year)
             if component == 1 {
                 return yearModel.totalMonthCount
@@ -43,7 +43,7 @@ class LLDatePickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         var string = ""
         if component == 0 {
             let year = startYear+row
-            if self.l_type == .LLLunar {
+            if self.l_type == .lunar {
                 let yearModel = LLCalendarTool.loadLunarYear(year)
                 string = "\(yearModel.year)" + yearModel.heaEarStr + yearModel.zodiacStr + "年"
             }
@@ -53,7 +53,7 @@ class LLDatePickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
             }
         }
         else {
-            if self.l_type == .LLLunar {
+            if self.l_type == .lunar {
                 if component == 1 {
                     let year = pickerView.selectedRow(inComponent: 0)+startYear
                     let yearModel = LLCalendarTool.loadLunarYear(year)
@@ -109,7 +109,7 @@ class LLDatePickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         let s_year = pickerView.selectedRow(inComponent: 0) + startYear
         let s_month = pickerView.selectedRow(inComponent: 1) + 1
         let s_day = pickerView.selectedRow(inComponent: 2) + 1
-        if l_type == .LLLunar {
+        if l_type == .lunar {
             let yearModel = LLCalendarTool.loadLunarYear(s_year)
             let maxMonth = yearModel.totalMonthCount
             let month = min(maxMonth, s_month)
@@ -123,18 +123,18 @@ class LLDatePickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     enum LLDateType {
-    case LLLunar //农历
-    case LLSolar //公历
+    case lunar //农历
+    case solar //公历
     }
     
     //1950年-2050年
     private let startYear = 1950
     private let endYear = 2050
-    private var l_type: LLDateType = .LLSolar
+    private var l_type: LLDateType = .solar
     private var l_pickerView: UIPickerView!
     private var didSelectedDayBlock: ((_ day: LLSolarDay) -> Void)?
     private var l_selectedModel: LLSolarDay?
-    init(frame: CGRect, type aType: LLDateType = .LLSolar) {
+    init(frame: CGRect, type aType: LLDateType = .solar) {
         super.init(frame: frame)
         self.backgroundColor = .white
         
@@ -178,7 +178,7 @@ class LLDatePickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
     func scroll(to date: Date) {
         let coms = LLCalendar.share.calendar_gl.dateComponents([.year, .month, .day], from: date)
-        if l_type == .LLLunar {
+        if l_type == .lunar {
             let lunar = LLCalendar.lunarFrom(coms.year!, coms.month!, coms.day!)
             scrollTo(year: lunar[0], month: lunar[1], day: lunar[2], isLeap: (lunar[3] == 1), coms: coms)
         }
@@ -191,7 +191,7 @@ class LLDatePickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         let com0 = year-startYear
         var com1 = month-1
         let com2 = day-1
-        if l_type == .LLLunar {
+        if l_type == .lunar {
             if isLeap {
                 com1 += 1
             }
@@ -206,7 +206,7 @@ class LLDatePickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
             l_selectedModel = LLSolarDay(coms.year!, coms.month!, coms.day!)
         }
         else {
-            if l_type == .LLLunar {
+            if l_type == .lunar {
                 let lunar = LLLunarDay(year, month, day, isLeap)
                 l_selectedModel = lunar.solarDay
             }
