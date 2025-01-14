@@ -1,7 +1,9 @@
 
 **一、效果图**
 
-![效果图](https://github.com/wangzhaomeng/WZMChatUI/blob/master/WZMChatUI/GitImage/preview.png?raw=true)
+![效果图](https://github.com/xiaoyi3699/LLCalendar/blob/main/preview1.jpg?raw=true)
+![效果图](https://github.com/xiaoyi3699/LLCalendar/blob/main/preview2.jpg?raw=true)
+![效果图](https://github.com/xiaoyi3699/LLCalendar/blob/main/preview3.jpg?raw=true)
 
 **二、集成方式**
 
